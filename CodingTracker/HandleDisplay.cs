@@ -1,7 +1,7 @@
 using static CodingTracker.ConsoleDisplay;
 using static CodingTracker.Validation;
-using static CodingTracker.Database;
 using static CodingTracker.LogHandler;
+using static CodingTracker.Database;
 
 namespace CodingTracker
 {

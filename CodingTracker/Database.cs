@@ -1,8 +1,8 @@
-using System.Configuration;
 using Microsoft.Data.Sqlite;
 using static CodingTracker.LogHandler;
 using System.Data;
 using static CodingTracker.Validation;
+using static CodingTracker.Config;
 
 namespace CodingTracker
 {
@@ -14,30 +14,11 @@ namespace CodingTracker
         private const string DeleteQuery = "DELETE FROM coding_tracker WHERE Id = @Id";
         private const string SelectAllQuery = "SELECT Id, StartTime, EndTime, Duration FROM coding_tracker";
 
-        // Method to retrieve the connection string from App.config with exception handling
-        public static string GetConnectionString()
+        private static readonly string ConnectionString = GetConnectionString();
+
+        public static SqliteConnection GetConnection()
         {
-            try
-            {
-                string? connectionString = ConfigurationManager.ConnectionStrings["CodingTrackerDb"]?.ConnectionString;
-
-                if (string.IsNullOrEmpty(connectionString))
-                {
-                    throw new InvalidOperationException("Connection string 'CodingTrackerDb' is missing or empty in App.config.");
-                }
-
-                return connectionString;
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                Log($"[Error] Failed to load connection string due to configuration error: {ex.Message}");
-                throw new InvalidOperationException("A configuration error occurred while retrieving the connection string.", ex);
-            }
-            catch (Exception ex)
-            {
-                Log($"[Error] Unexpected error while retrieving connection string: {ex.Message}");
-                throw new InvalidOperationException("An unexpected error occurred while retrieving the connection string.", ex);
-            }
+            return new SqliteConnection(ConnectionString);
         }
 
         // Thia method inserts a new coding session into the database
@@ -132,7 +113,7 @@ namespace CodingTracker
             Log("Initializing database...");
             try
             {
-                using (var connection = new SqliteConnection(GetConnectionString()))
+                using (var connection = GetConnection())
                 {
                     connection.Open();
                     var tableCmd = connection.CreateCommand();
@@ -221,7 +202,7 @@ namespace CodingTracker
         }
 
         // Helper method to retrieve query parameters for logging
-        private static string GetCommandParameters(SqliteCommand command)
+        public static string GetCommandParameters(SqliteCommand command)
         {
             return string.Join(", ", command.Parameters.Cast<SqliteParameter>().Select(p => $"{p.ParameterName}={p.Value}"));
         }

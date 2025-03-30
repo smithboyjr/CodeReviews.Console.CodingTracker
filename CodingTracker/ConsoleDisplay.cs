@@ -36,6 +36,7 @@ namespace CodingTracker
         private static Table CreateCodingSessionTable()
         {
             var table = new Table();
+            table.Border(TableBorder.HeavyEdge);
             table.AddColumn("Id");
             table.AddColumn("Start Time");
             table.AddColumn("End Time");
@@ -60,7 +61,8 @@ namespace CodingTracker
                         session.Id.ToString(),
                         session.StartTime.ToString("MM-dd-yyyy HH:mm"),
                         session.EndTime.ToString("MM-dd-yyyy HH:mm"),
-                        session.Duration?.ToString() ?? "N/A");
+                        session.Duration?.ToString() ?? "N/A"
+                    );
                 }
             }
 
