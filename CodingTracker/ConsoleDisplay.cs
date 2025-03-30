@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Spectre.Console;
-using Spectre.Console.Cli;
 using static CodingTracker.HandleDisplay;
-using static CodingTracker.UserInput;
 using static CodingTracker.Validation;
 
 namespace CodingTracker

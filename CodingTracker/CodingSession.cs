@@ -1,5 +1,3 @@
-using System;
-
 namespace CodingTracker
 {
     public class CodingSession

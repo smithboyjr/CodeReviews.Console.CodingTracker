@@ -1,6 +1,4 @@
-using System;
 using System.Configuration;
-using System.Collections.Specialized;
 
 namespace CodingTracker
 {

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using static CodingTracker.ConsoleDisplay;
-using static CodingTracker.UserInput;
-using static CodingTracker.CodingSession;
 using static CodingTracker.Validation;
 using static CodingTracker.Database;
 using static CodingTracker.LogHandler;

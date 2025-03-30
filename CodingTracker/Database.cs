@@ -1,13 +1,8 @@
-using System;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
 using static CodingTracker.LogHandler;
 using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using Dapper;
 using static CodingTracker.Validation;
-using static CodingTracker.CodingSession;
 
 namespace CodingTracker
 {
